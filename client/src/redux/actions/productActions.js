@@ -5,7 +5,7 @@ export const getProducts = () => async (dispatch) => {
   dispatch(setLoading(true));
 
   try {
-    const { data } = await axios.get("https://localhost:3000/api/products");
+    const { data } = await axios.get("/api/products"); // localhost:5000 added as a proxy in package.json file
     dispatch(setProducts(data));
   } catch (error) {
     dispatch(
