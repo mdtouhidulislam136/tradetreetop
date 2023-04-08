@@ -13,13 +13,13 @@ export const productSlice = createSlice({
     setLoading: (state) => {
       state.loading = true;
     },
-    setProducts: (state, { paload }) => {
+    setProducts: (state, { payload }) => {
       state.loading = false;
       state.error = null;
-      state.products = paload;
+      state.products = payload;
     },
-    setError: (state, { paload }) => {
-      state.error = paload;
+    setError: (state, { payload }) => {
+      state.error = payload;
       state.loading = false;
     },
   },
