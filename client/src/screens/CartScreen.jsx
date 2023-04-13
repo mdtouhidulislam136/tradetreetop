@@ -5,7 +5,7 @@ import {
   HStack,
   Link,
   Stack,
-  useColorModeValue,
+  useColorModeValue as mode,
   Spinner,
   Alert,
   AlertTitle,
@@ -18,11 +18,13 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Link as ReactLink } from "react-router-dom";
+import CartItem from "../components/cartItem";
 
 const CartScreen = () => {
-  const productList = useSelector((state) => state.products);
-    const { loading, error, products } = productList;
-    const color = useColorModeValue('orange.500', 'orange.200');
+  const cartInfo = useSelector((state) => state.cart);
+  const { loading, error, cart } = cartInfo;
+  const getHeadingContent = () =>
+    cart.length === 1 ? "(1 item)" : `(${cart.length} Items)`;
 
   return (
     <Wrap spacing="30px" justify="center" minHeight="100hv">
@@ -65,15 +67,23 @@ const CartScreen = () => {
           >
             <Stack spacing={{ base: "8", md: "10" }} flex="2">
               <Heading fontSize="2xl" fontWeight="extrabold">
-                Shopping Cart
+                Shopping Cart {getHeadingContent()}
               </Heading>
-              <Stack spacing="6">{/* CartItem */}</Stack>
+              <Stack spacing="6">
+                {cart.map((cartItem) => (
+                  <CartItem key={cartItem.id} cartItem={cartItem} />
+                ))}
+              </Stack>
             </Stack>
             <Flex direction="column" align="center" flex="1">
               {/* CartOrderSummary */}
               <HStack mt="6" fontWeight="semibold">
                 <p>or</p>
-                <Link as={ReactLink} to="/products" color={color}>
+                <Link
+                  as={ReactLink}
+                  to="/products"
+                  color={mode("orange.500", "orange.200")}
+                >
                   Continue Shopping
                 </Link>
               </HStack>
