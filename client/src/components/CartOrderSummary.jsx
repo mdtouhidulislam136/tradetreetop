@@ -5,14 +5,14 @@ import {
   Heading,
   Stack,
   Text,
-  useColorMode as mode,
+//   useColorMode as mode,
   Badge,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link as ReactLink, useNavigate } from "react-router-dom";
-import { set } from "mongoose";
+
 
 export const CartOrderSummary = () => {
   const [buttonLoading, setButtonLoading] = useState();
