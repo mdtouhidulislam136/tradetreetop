@@ -5,7 +5,7 @@ import {
   Box,
   Image,
   Badge,
-  useColorModeValue,
+  useColorModeValue as mode,
   Icon,
   Button,
   Tooltip,
@@ -85,7 +85,7 @@ const ProductCard = ({ product }) => {
     <Stack
       p="2"
       spacing="3px"
-      bg={useColorModeValue("white", "gray.800")}
+      bg={mode("white", "gray.800")}
       minW="240px"
       h="450px"
       borderWidth="1px"
@@ -143,7 +143,7 @@ const ProductCard = ({ product }) => {
       </Flex>
 
       <Flex justify="space-between">
-        <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
+        <Box fontSize="2xl" color={mode("gray.800", "white")}>
           <Box as="span" color={"gray.600"} fontSize="lg">
             $
           </Box>

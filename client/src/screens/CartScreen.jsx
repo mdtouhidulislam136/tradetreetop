@@ -12,13 +12,11 @@ import {
   AlertIcon,
   AlertDescription,
   Wrap,
-  WrapItem,
-  Center,
-  ProductCard,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Link as ReactLink } from "react-router-dom";
-import CartItem from "../components/cartItem";
+import CartItem from "../components/CartItem";
+import { CartOrderSummary } from "../components/CartOrderSummary";
 
 const CartScreen = () => {
   const cartInfo = useSelector((state) => state.cart);
@@ -47,11 +45,13 @@ const CartScreen = () => {
       ) : cart.length <= 0 ? (
         <Alert status="warning">
           <AlertIcon />
-          <AlertTitle>Your cart is empty</AlertTitle>
-          <Link as={ReactLink} to="/products">
-            Click here to see our products.
-          </Link>
-          <AlertDescription>{error}</AlertDescription>
+          <AlertTitle>Your cart is empty.</AlertTitle>
+
+          <AlertDescription>
+            <Link as={ReactLink} to="/products">
+              Click here to see our products.
+            </Link>
+          </AlertDescription>
         </Alert>
       ) : (
         <Box
@@ -76,7 +76,7 @@ const CartScreen = () => {
               </Stack>
             </Stack>
             <Flex direction="column" align="center" flex="1">
-              {/* CartOrderSummary */}
+              <CartOrderSummary />
               <HStack mt="6" fontWeight="semibold">
                 <p>or</p>
                 <Link

@@ -11,7 +11,7 @@ export const addCartItem = (id, quantity) => async (dispatch) => {
             image: data.image,
             price: data.price,
             stock: data.stock,
-            quantity
+            quantity,
         };
         dispatch(cartItemAdd(itemToAdd));
     } catch (error) {

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Flex,
@@ -5,12 +6,13 @@ import {
   Stack,
   Text,
   useColorMode as mode,
-  Bage,
+  Badge,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { GiFastArrow, FaArrowRight } from "react-icons/gi";
+import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link as ReactLink, useNavigate } from "react-router-dom";
+import { set } from "mongoose";
 
 export const CartOrderSummary = () => {
   const [buttonLoading, setButtonLoading] = useState();
@@ -29,23 +31,22 @@ export const CartOrderSummary = () => {
       <Heading size="md">Order Summary</Heading>
       <Stack spacing="6">
         <Flex justify="space-between">
-          <Text fontWeight="medium" color={mode("gray.600", "gray.400")}>
-            {" "}
+          <Text fontWeight="medium" >
             Subtotal
           </Text>
           <Text fontWeight="medium">{subtotal}</Text>
         </Flex>
         <Flex justify="space-between">
-          <Text fontWeight="medium" color={mode("gray.600", "gray.400")}>
+          <Text fontWeight="medium" >
             Shipping
           </Text>
           <Text fontWeight="medium">
             {subtotal <= 1000 ? (
               standardShipping
             ) : (
-              <Bage rounded="full" px="2" fontSize="0.8em" colorScheme="green">
+              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="green">
                 free
-              </Bage>
+              </Badge>
             )}
           </Text>
         </Flex>
