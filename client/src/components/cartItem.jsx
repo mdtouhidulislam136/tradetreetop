@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { addCartItem } from "../redux/actions/cartActions";
+import { addCartItem, removeCartItem } from "../redux/actions/cartActions";
 
 const CartItem = ({ cartItem }) => {
   const { name, image, price, stock, quantity, id } = cartItem;
@@ -58,7 +58,7 @@ const CartItem = ({ cartItem }) => {
           ))}
         </Select>
         <Text fontWeight="bold">${price}</Text>
-        <CloseButton />
+        <CloseButton onClick={() => dispatch(removeCartItem(id))}/>
       </Flex>
     </Flex>
   );
