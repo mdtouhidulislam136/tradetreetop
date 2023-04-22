@@ -26,12 +26,11 @@ export const getProducts = () => async (dispatch) => {
   }
 };
 
-
 export const getProduct = (id) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
     const { data } = await axios.get(`/api/products/${id}`);
-    dispatch(setProduct(data))
+    dispatch(setProduct(data));
   } catch (error) {
     dispatch(
       setError(
@@ -42,6 +41,5 @@ export const getProduct = (id) => async (dispatch) => {
           : "An unexpected error, Please try it later."
       )
     );
-    
   }
-}
+};
