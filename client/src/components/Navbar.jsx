@@ -53,7 +53,7 @@ const Navbar = () => {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack>
-          <Link as={ReactLink} to="/products" style={{textDecoration: 'none'}}>
+          <Link as={ReactLink} to="/" style={{ textDecoration: "none" }}>
             <Flex alignItems="center">
               <Icon as={GiTechnoHeart} h={6} w={6} color="orange.400" />
               <Text fontWeight="extrabold">TradeTreeTop</Text>
