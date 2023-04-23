@@ -8,7 +8,7 @@ import {
   Stack,
   Text,
   Box,
-  useColorMode,
+  useColorModeValue,
   Flex,
   Icon,
 } from "@chakra-ui/react";
@@ -17,7 +17,7 @@ import { GiTechnoHeart } from "react-icons/gi";
 // import { Logo } from "./Logo";
 
 const Footer = () => (
-  <Box w="100%" >
+  <Box w="100%" bg={useColorModeValue("gray.100", "gray.900")}>
     <Container as="footer" role="contentinfo" maxW="7xl ">
       <Stack
         spacing="8"
@@ -28,8 +28,13 @@ const Footer = () => (
         <Stack spacing={{ base: "6", md: "8" }} align="start">
           {/* <Logo /> */}
           <Flex alignItems="center">
-            <Icon as={GiTechnoHeart} h={10} w={10} color="orange.400" />
-            {/* color={useColorMode("orange.500", "orange.600")} */}
+            <Icon
+              as={GiTechnoHeart}
+              h={10}
+              w={10}
+              color={useColorModeValue("orange.500", "orange.600")}
+            />
+
             <Text fontSize="2xl" fontWeight="extrabold">
               TradeTreeTop
             </Text>
