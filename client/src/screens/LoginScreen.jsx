@@ -86,12 +86,10 @@ const LoginScreen = () => {
                     <AlertTitle>Sorry</AlertTitle>
                     <AlertDescription>{error}</AlertDescription>
                   </Alert>
-                              )}
-                              <Stack spacing='5'>
-                                  <FormControl>
-                                      
-                                  </FormControl>
-                              </Stack>
+                )}
+                <Stack spacing="5">
+                  <FormControl></FormControl>
+                </Stack>
               </Stack>
             </Box>
           </Stack>
