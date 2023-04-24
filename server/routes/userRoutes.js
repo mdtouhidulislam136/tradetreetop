@@ -3,7 +3,7 @@ import User from "../models/User.js";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 
-const userRouter = express.Router();
+const userRoutes = express.Router();
 // redefine expiresIn
 
 const genToken = (id) => {
@@ -16,7 +16,7 @@ const logInUser = asyncHandler(async (req, res) => {
 
   if (user && (await user.matchPasswords(password))) {
     res.json({
-      _id: user_id,
+      _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
@@ -24,15 +24,15 @@ const logInUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
+    throw new Error("Invalid email or password");
   }
-  throw new Error("Invalid email or password");
 });
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const userExist = await user.findOne({ tmail });
-  if (userExist) {
+  const userExists = await User.findOne({ email });
+  if (userExists) {
     res.status(404);
     throw new Error("We already have an account with that email address. ");
   }
@@ -45,7 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (user) {
     res.status(201).json({
-      _id: user_id,
+      _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
@@ -57,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-userRouter.route("/login").post(logInUser);
-userRouter.route("/register").post(registerUser);
+userRoutes.route("/login").post(logInUser);
+userRoutes.route("/register").post(registerUser);
 
-export default userRouter;
+export default userRoutes;
