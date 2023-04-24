@@ -10,6 +10,7 @@ const genToken = (id) => {
   return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: "60d" });
 };
 
+// login user
 const logInUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -27,6 +28,10 @@ const logInUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 });
+
+
+// post register user
+// asyncHandler giving change to show error to the client side
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
