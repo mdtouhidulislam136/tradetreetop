@@ -33,10 +33,25 @@ import { GiTechnoHeart } from "react-icons/gi";
 import { MdLocalShipping, MdLogout } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/userActions";
+import { FiShoppingCart } from "react-icons/fi";
+
+const ShoppingCartIcon = () => {
+  const cartInfo = useSelector((state) => state.cart);
+  const { cart } = cartInfo;
+  return (
+    <Flex>
+      <Text as="sub" fontSize="xs" color='orange' >
+        {cart.length}
+      </Text>
+      <Icon ml='-1.5'as={FiShoppingCart} h="4" w="7" alignSelf="center" />
+      Cart
+    </Flex>
+  );
+};
 
 const links = [
   { linkName: "Products", path: "/products" },
-  { linkName: "ShoppingCart", path: "/cart" },
+  { linkName: <ShoppingCartIcon />, path: "/cart" },
 ];
 
 const NavLink = ({ path, children }) => (
@@ -121,7 +136,7 @@ const Navbar = () => {
                     <Text ml="2">Your Orders</Text>
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem>
+                  <MenuItem onClick={logoutHandler}>
                     <MdLogout />
                     <Text ml="2">Logout</Text>
                   </MenuItem>
