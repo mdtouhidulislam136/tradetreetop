@@ -5,7 +5,7 @@ import { useState } from "react";
 import { InputRightElement, Button, InputGroup } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-const TextField = ({ label, type, name, placeholder }) => {
+const PasswordTextField = ({ label, type, name, placeholder }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [field, meta] = useField({ label, type, name, placeholder });
   return (
@@ -15,7 +15,7 @@ const TextField = ({ label, type, name, placeholder }) => {
         <Field
           as={Input}
           {...field}
-          type={type}
+          type={showPassword ? "text" : type}
           name={name}
           placeholder={placeholder}
         />
@@ -34,4 +34,4 @@ const TextField = ({ label, type, name, placeholder }) => {
   );
 };
 
-export default TextField;
+export default PasswordTextField;
