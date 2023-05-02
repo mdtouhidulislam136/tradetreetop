@@ -9,11 +9,11 @@ import {
   setDeliveredFlag,
   getOrders,
 } from "../slices/admin";
-// import {
-//   setProducts,
-//   setProductUpdateFlag,
-//   setReviewRemovalFlag,
-// } from "../slices/products";
+import {
+  setProducts,
+  setProductUpdateFlag,
+  setReviewRemovalFlag,
+} from "../slices/products";
 
 export const getAllUsers = () => async (dispatch, getState) => {
   const {
@@ -186,8 +186,8 @@ export const updateProduct =
         },
         config
       );
-    //   dispatch(setProducts(data));
-    //   dispatch(setProductUpdateFlag());
+      dispatch(setProducts(data));
+      dispatch(setProductUpdateFlag());
     } catch (error) {
       dispatch(
         setError(
@@ -215,8 +215,8 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.delete(`api/products/${id}`, config);
-    // dispatch(setProducts(data));
-    // dispatch(setProductUpdateFlag());
+    dispatch(setProducts(data));
+    dispatch(setProductUpdateFlag());
     dispatch(resetError());
   } catch (error) {
     dispatch(
@@ -245,8 +245,8 @@ export const uploadProduct = (newProduct) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.post(`api/products`, newProduct, config);
-    // dispatch(setProducts(data));
-    // dispatch(setProductUpdateFlag());
+    dispatch(setProducts(data));
+    dispatch(setProductUpdateFlag());
   } catch (error) {
     dispatch(
       setError(
