@@ -1,8 +1,7 @@
 import express from "express";
 import Product from "../models/Product.js";
 import asyncHandler from "express-async-handler";
-import { protectRoute, admin } from "../middleware/authMiddleware";
-
+import { protectRoute, admin } from "../middleware/authMiddleware.js";
 
 const productRoutes = express.Router();
 const getProducts = async (req, res) => {
@@ -22,7 +21,16 @@ const getProduct = async (req, res) => {
 
 //create a product
 const createNewProduct = asyncHandler(async (req, res) => {
-  const { brand, name, category, stock, price, image, productIsNew, description } = req.body;
+  const {
+    brand,
+    name,
+    category,
+    stock,
+    price,
+    image,
+    productIsNew,
+    description,
+  } = req.body;
 
   const newProduct = await Product.create({
     brand,
@@ -30,7 +38,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
     category,
     stock,
     price,
-    image: '/images/' + image,
+    image: "/images/" + image,
     productIsNew,
     description,
   });
@@ -42,7 +50,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
     res.json(products);
   } else {
     res.status(404);
-    throw new Error('Product could not be uploaded.');
+    throw new Error("Product could not be uploaded.");
   }
 });
 
@@ -54,12 +62,22 @@ const deleteProduct = asyncHandler(async (req, res) => {
     res.json(product);
   } else {
     res.status(404);
-    throw new Error('Product not found');
+    throw new Error("Product not found");
   }
 });
 //update a product
 const updateProduct = asyncHandler(async (req, res) => {
-  const { brand, name, image, category, stock, price, id, productIsNew, description } = req.body;
+  const {
+    brand,
+    name,
+    image,
+    category,
+    stock,
+    price,
+    id,
+    productIsNew,
+    description,
+  } = req.body;
 
   const product = await Product.findById(id);
 
@@ -68,7 +86,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.price = price;
     product.description = description;
     product.brand = brand;
-    product.image = '/images/' + image;
+    product.image = "/images/" + image;
     product.category = category;
     product.stock = stock;
     product.productIsNew = productIsNew;
@@ -77,10 +95,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.json(updatedProduct);
   } else {
     res.status(404);
-    throw new Error('Product not found.');
+    throw new Error("Product not found.");
   }
 });
-
 
 productRoutes.route("/").get(getProducts);
 productRoutes.route("/:id").get(getProduct);
