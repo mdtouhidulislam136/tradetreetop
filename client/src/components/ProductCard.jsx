@@ -1,11 +1,10 @@
-import React from "react";
 import {
   Flex,
   Circle,
   Box,
   Image,
   Badge,
-  useColorModeValue as mode,
+  useColorModeValue,
   Icon,
   Button,
   Tooltip,
@@ -24,7 +23,6 @@ import { addCartItem } from "../redux/actions/cartActions";
 
 const Rating = ({ rating, numberOfReviews }) => {
   const { iconSize, setIconSize } = useState("14px");
-
   return (
     <Flex>
       <HStack spacing="2px">
@@ -67,7 +65,7 @@ const ProductCard = ({ product }) => {
     if (cart.some((cartItem) => cartItem.id === id)) {
       toast({
         description:
-          "This item is already in your cart. Go to your cart to change the amount",
+          "This item is already in your cart. Go to your cart to change the amount.",
         status: "error",
         isClosable: true,
       });
@@ -85,11 +83,12 @@ const ProductCard = ({ product }) => {
     <Stack
       p="2"
       spacing="3px"
-      bg={mode("white", "gray.800")}
+      bg={useColorModeValue("white", "gray.800")}
       minW="240px"
       h="450px"
       borderWidth="1px"
       rounded="lg"
+      shadow="lg"
       position="relative"
     >
       {product.productIsNew && (
@@ -107,10 +106,11 @@ const ProductCard = ({ product }) => {
           position="absolute"
           top={2}
           right={2}
-          bg="green.300"
+          bg="red.200"
         />
       )}
-      <Image src={product.image} alt={product.name} roundedTop="lg" />
+      <Image p={4} src={product.image} alt={product.name} roundedTop="lg" />
+
       <Box flex="1" maxH="5" alignItems="baseline">
         {product.stock <= 0 && (
           <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
@@ -126,11 +126,11 @@ const ProductCard = ({ product }) => {
       <Flex mt="1" justifyContent="space-between" alignContent="center">
         <Link
           as={ReactLink}
-          to={`/product${product._id}`}
+          to={`/product/${product._id}`}
           pt="2"
           cursor="pointer"
         >
-          <Box fontSize="2xl" fontWeight="semibold" lineHeight="tight">
+          <Box fontSize="2xl" fontWeight="semibold" as="h4" lineHeight="tight">
             {product.name}
           </Box>
         </Link>
@@ -141,28 +141,27 @@ const ProductCard = ({ product }) => {
           numberOfReviews={product.numberOfReviews}
         />
       </Flex>
-
       <Flex justify="space-between">
-        <Box fontSize="2xl" color={mode("gray.800", "white")}>
+        <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
           <Box as="span" color={"gray.600"} fontSize="lg">
             $
           </Box>
-          {product.price.toFixed(2)}
+          {Number(product.price).toFixed(2)}
         </Box>
         <Tooltip
           label="Add to cart"
           bg="white"
-          placeContent="top"
-          color="gray.800"
-          fontSize="1.2em"
+          placement={"top"}
+          color={"gray.800"}
+          fontSize={"1.2em"}
         >
           <Button
             variant="ghost"
-            display="flex"
-            disabled={product.stock <= 0}
+            display={"flex"}
+            isDisabled={product.stock <= 0}
             onClick={() => addItem(product._id)}
           >
-            <Icon as={FiShoppingCart} h={7} w={7} alignSelf="center" />
+            <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
           </Button>
         </Tooltip>
       </Flex>
